@@ -1,4 +1,4 @@
 FLASK_APP=server.py flask run
-gunicorn --bind 0.0.0.0:5555 wsgi:app
+gunicorn --bind 0.0.0.0:5555 --reload wsgi:app
 export FLASK_ENV=development # enable development mode other is production/testing http://flask.pocoo.org/docs/1.0/config/
 https://github.com/tiangolo/uwsgi-nginx-flask-docker #ref for flask on docker

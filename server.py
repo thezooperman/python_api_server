@@ -1,7 +1,7 @@
 import os
 from json import dumps
 
-# import dotenv
+import dotenv
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from sqlalchemy import create_engine
@@ -9,9 +9,14 @@ from sqlalchemy import create_engine
 db_connect = create_engine('sqlite:///data/chinook.db', echo=True)
 app = Flask(__name__)
 api = Api(app)
-# check_env_file = dotenv.find_dotenv('.env')
+check_env_file = dotenv.find_dotenv('.env')
+if check_env_file:
+    v = dotenv.load_dotenv('.env', verbose=1)
+    # print(check_env_file, v)
+
 # print(os.environ.get('DEBUG'))
-app.config['DEBUG'] = os.environ.get('DEBUG', False)
+app.config['DEBUG'] = os.getenv('DEBUG', False)
+app.config['FLASK_ENV'] = os.getenv('FLASK_ENV', 'production')
 
 
 class Employees(Resource):
