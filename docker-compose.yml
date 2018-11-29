@@ -1,0 +1,11 @@
+version: '2.1'
+
+services:
+  python_api_server:
+    image: python_api_server
+    command: pipenv run gunicorn -c gunicorn_config.py wsgi:app
+    volumes:
+      - ./app/:/usr/src/app/
+    build: ./app/
+    ports:
+      - 5555:5555
